@@ -1,4 +1,4 @@
-export function validSchemaAuth (schema) {
+export function validSchema (schema) {
     return (req, res, next) => {
         const { error } = schema.validate(req.body, {abortEarly: false});
 
