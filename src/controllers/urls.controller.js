@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 
-export async function getById (req, res) {
+export async function getById(req, res) {
     const { id } = req.params;
 
     try {
@@ -14,7 +14,26 @@ export async function getById (req, res) {
     }
 }
 
-export async function createShortUrl (req, res) {
+export async function openUrl(req, res) {
+    const { shortUrl } = req.params;
+
+    try {
+        const link = await db.query(`SELECT * FROM links WHERE "shortUrl"=$1;`, [shortUrl]);
+
+        if (link.rowCount === 0) return res.status(404).send("Esse id não existe");
+
+        let visitCount = link.rows[0].visitCount++;
+
+        await db.query(`
+        UPDATE links SET "visitCount"=$1 WHERE id=$2;`, [visitCount, link.rows[0].id]);
+
+        res.redirect(link.rows[0].url);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+export async function createShortUrl(req, res) {
     const { url } = req.body;
     const { user } = res.locals;
     const { user_id } = user;
