@@ -11,7 +11,7 @@ export async function signUp(req, res) {
         if (user.rowCount !== 0) return res.status(409).send('Email já cadastrado');
 
         await db.query(`
-        INSERT INTO users (name, email, password) 
+        INSERT INTO users (name, email, password, visitCount) 
         VALUES ($1, $2, $3);`, 
         [name, email, encryptedPassword]);
 
