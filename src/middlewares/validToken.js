@@ -1,3 +1,5 @@
+import { db } from "../configs/database.js";
+
 export async function tokenValidation (req, res, next) {
     const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '');
@@ -6,7 +8,7 @@ export async function tokenValidation (req, res, next) {
 
     try {
         const user = await db.query(`SELECT * FROM sessions WHERE token=$1`, [token]);
-        if (user.rowCount !== 0) return res.status(401).send('Você não tem autorização');
+        if (user.rowCount === 0) return res.status(401).send('Você não tem autorização');
 
         res.locals.user = user.rows[0];
         

@@ -1,4 +1,4 @@
-import { db } from "../configs/database.js"
+import { db } from "../configs/database.js";
 import { nanoid } from "nanoid";
 
 export async function getById(req, res) {
@@ -38,7 +38,7 @@ export async function createShortUrl(req, res) {
     const { url } = req.body;
     const { user } = res.locals;
     const userId = user.user_id;
-    const shortUrl = (teste = nanoid(8));
+    const shortUrl = (nanoid(8));
 
     try {
         await db.query(`
