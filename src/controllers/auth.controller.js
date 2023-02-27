@@ -1,3 +1,4 @@
+import { db } from "../configs/database.js"
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 
@@ -11,7 +12,7 @@ export async function signUp(req, res) {
         if (user.rowCount !== 0) return res.status(409).send('Email já cadastrado');
 
         await db.query(`
-        INSERT INTO users (name, email, password, visitCount) 
+        INSERT INTO users (name, email, password) 
         VALUES ($1, $2, $3);`, 
         [name, email, encryptedPassword]);
 

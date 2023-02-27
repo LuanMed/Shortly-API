@@ -1,3 +1,4 @@
+import { db } from "../configs/database.js"
 import { nanoid } from "nanoid";
 
 export async function getById(req, res) {

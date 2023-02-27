@@ -1,3 +1,5 @@
+import { db } from "../configs/database.js"
+
 export async function getUsersMe (req, res) {
     const userId = res.locals.user.user_id;
     
