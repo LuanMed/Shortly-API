@@ -8,7 +8,7 @@ export async function getUsersMe(req, res) {
         SELECT users.id, users.name, SUM(links."visitCount") AS "visitCount",
         json_agg(json_build_object(
 	        'id', links.id,
-	        'shorUrl', links."shortUrl",
+	        'shortUrl', links."shortUrl",
 	        'url', links.url,
 	        'visitCount', links."visitCount"
         )ORDER BY links.id) AS "shortenedUrls"
