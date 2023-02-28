@@ -23,7 +23,7 @@ export async function openUrl(req, res) {
 
         if (link.rowCount === 0) return res.status(404).send("Esse id não existe");
 
-        let visitCount = link.rows[0].visitCount++;
+        let visitCount = Number(link.rows[0].visitCount) + 1;
 
         await db.query(`
         UPDATE links SET "visitCount"=$1 WHERE id=$2;`, [visitCount, link.rows[0].id]);
