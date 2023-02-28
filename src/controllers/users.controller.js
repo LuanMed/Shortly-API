@@ -11,7 +11,7 @@ export async function getUsersMe(req, res) {
 	        'shorUrl', links."shortUrl",
 	        'url', links.url,
 	        'visitCount', links."visitCount"
-        )ORDER BY links.id) AS "shotenedUrls"
+        )ORDER BY links.id) AS "shortenedUrls"
         FROM users JOIN links ON links.user_id = users.id
         WHERE users.id = $1
         GROUP BY users.id, users.name;
