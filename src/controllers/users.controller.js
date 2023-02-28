@@ -6,7 +6,8 @@ export async function getUsersMe (req, res) {
     try {
         const user = await db.query(`SELECT * FROM users WHERE id=$1;`, [userId]);
         const visitCount = await db.query(`SELECT links."visitCount" FROM links WHERE ;`);
-        
+
+        res.sendStatus(200);
     } catch (error) {
         res.status(500).send(error.message);
     }
