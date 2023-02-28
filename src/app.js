@@ -15,4 +15,4 @@ app.use(cors());
 app.use([authRouter, usersRouter, urlsRouter, rankingRouter])
 
 const PORT = process.env.PORT || 5000
-app.listen(PORT, () => console.log(`Servidor rodou na porta: ${process.env.PORT}`));
+app.listen(PORT, () => console.log(`Servidor rodou na porta: ${PORT}`));
