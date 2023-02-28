@@ -1,1 +1,14 @@
-import { db } from "../configs/database.js"
+import { db } from "../configs/database.js";
+
+export async function visitRanking (req, res) {
+    try {
+        const body = await db.query(`
+        SELECT users.id, users.name, COUNT(links.id) AS "linksCount", SUM(links."visitCount") AS "visitCount"
+        FROM users JOIN links ON links.user_id = users.id
+        GROUP BY users.id LIMIT 10;`);
+
+        res.send(body.rows);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
